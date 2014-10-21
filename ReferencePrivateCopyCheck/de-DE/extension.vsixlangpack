@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<VsixLanguagePack Version="1.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema-lp/2010">
+  <LocalizedName>Lokale Kopie Überprüfung (Verweise)</LocalizedName>
+  <LocalizedDescription>
+    Prüft die Lokale Kopie Einstellung von allen Verweisen der Projekte in einer Projektmappe.
+    Der aktuelle Zustand kann für den späteren Vergleich und Widerherstellung gespeichert werden.
+  </LocalizedDescription>
+</VsixLanguagePack>

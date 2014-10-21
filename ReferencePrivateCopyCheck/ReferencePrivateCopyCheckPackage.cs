@@ -32,7 +32,7 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck {
    [PackageRegistration(UseManagedResourcesOnly = true)]
    // This attribute is used to register the information needed to show this package
    // in the Help/About dialog of Visual Studio.
-   [InstalledProductRegistration("#110", "#112", "1.0", IconResourceID = 400)]
+   [InstalledProductRegistration("#110", "#112", "0.2", IconResourceID = 400)]
    // This attribute is needed to let the shell know that this package exposes some menus.
    [ProvideMenuResource("Menus.ctmenu", 1)]
    [Guid(GuidList.guidReferencePrivateCopyCheckPkgString)]
@@ -66,8 +66,8 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck {
          if (null == mcs) { return; }
 
          // Create the command for the menu item.
-         var menuCommandID = new CommandID(GuidList.guidReferencePrivateCopyCheckCmdSet, (int) PkgCmdIDList.cmdidCheckReferencePrivateCopyFlag);
-         var menuItem = new MenuCommand(MenuItemCallback, menuCommandID);
+         var menuCommandId = new CommandID(GuidList.guidReferencePrivateCopyCheckCmdSet, (int) PkgCmdIDList.cmdidCheckReferencePrivateCopyFlag);
+         var menuItem = new MenuCommand(MenuItemCallback, menuCommandId);
          mcs.AddCommand(menuItem);
       }
 
@@ -91,7 +91,9 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck {
          // Load all C# projects
          var vsProjects = solution.Projects.GetCsharpProjects()
             .Where(w => w.Object is VSProject)
-            .Select(s => s.Object as VSProject).ToList();
+            .Select(s => s.Object as VSProject)
+            .OrderBy(o => o.Project.Name)
+            .ToList();
 
          // Load reference configuration
          var configurations = new List<ProjectTemplateModel>();

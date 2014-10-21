@@ -29,7 +29,7 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.Commands 
                      .OfType<Reference>()
                      .Select(sr => new ReferenceTemplateModel(sr.Identity, sr.CopyLocal))
                      .ToList()
-            });
+            }).ToList();
 
       var configurationContent = JsonConvert.SerializeObject(referenceConfiguration, Formatting.Indented);
 
