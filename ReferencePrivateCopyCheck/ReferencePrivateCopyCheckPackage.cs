@@ -91,7 +91,9 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck {
          // Load all C# projects
          var vsProjects = solution.Projects.GetCsharpProjects()
             .Where(w => w.Object is VSProject)
-            .Select(s => s.Object as VSProject).ToList();
+            .Select(s => s.Object as VSProject)
+            .OrderBy(o => o.Project.Name)
+            .ToList();
 
          // Load reference configuration
          var configurations = new List<ProjectTemplateModel>();

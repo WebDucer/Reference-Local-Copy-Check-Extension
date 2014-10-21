@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="870b8cc6-9403-452b-8565-45d632f9152d" Version="0.1" Language="de-DE" Publisher="WebDucer" />
+    <Identity Id="870b8cc6-9403-452b-8565-45d632f9152d" Version="0.2" Language="de-DE" Publisher="WebDucer" />
     <DisplayName>ReferencePrivateCopyCheck</DisplayName>
     <Description>Prüfung auf "Lokale Kopie" bei allen Referenzen der Solution.</Description>
     <Icon>Resources\Package.ico</Icon>
