@@ -2,8 +2,11 @@
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
     <Identity Id="870b8cc6-9403-452b-8565-45d632f9152d" Version="0.2" Language="de-DE" Publisher="WebDucer" />
-    <DisplayName>ReferencePrivateCopyCheck</DisplayName>
-    <Description>Prüfung auf "Lokale Kopie" bei allen Referenzen der Solution.</Description>
+    <DisplayName>Local Copy Check (Reference)</DisplayName>
+    <Description>
+      Check local copy flag for references in all projects of the solution.
+      The current state can be stored for later comarissons and recovery.
+    </Description>
     <Icon>Resources\Package.ico</Icon>
     <PreviewImage>Resources\RefConfigWindow_200.png</PreviewImage>
     <Tags>Local Copy, Reference</Tags>

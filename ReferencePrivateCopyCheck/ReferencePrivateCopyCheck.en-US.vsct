@@ -65,7 +65,7 @@
         <Parent guid="guidReferencePrivateCopyCheckCmdSet" id="ReferenceGroup" />
         <Icon guid="guidImages" id="bmpPic1" />
         <Strings>
-          <ButtonText>Prüfe Referenzen auf lokale Kopie Einstellungen</ButtonText>
+          <ButtonText>Local Copy Check (Reference)</ButtonText>
         </Strings>
       </Button>
 

@@ -7,18 +7,11 @@
         xmlns:conv="clr-namespace:de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.Converter"
         xmlns:vm="clr-namespace:de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModels"
         xmlns:dvm="clr-namespace:de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.Design"
+        xmlns:resx="clr-namespace:de.webducer.net.extensions.ReferencePrivateCopyCheck.Resources"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance dvm:DesignTimeReferenceListViewModel, IsDesignTimeCreatable=True}"
-        Title="Korrektur der Projekt-Referenzen" Height="550" Width="450" WindowStyle="ToolWindow">
+        Title="{x:Static resx:UI.DialogTitle}" Height="550" Width="450" WindowStyle="ToolWindow">
     <Window.Resources>
-        <!-- Text Resources -->
-        <sys:String x:Key="PrivateCopyLabel">Lokale Kopie</sys:String>
-        <sys:String x:Key="ShowOnlyConflictsLabel">Nur Konflikte anzeigen</sys:String>
-        <sys:String x:Key="ApplyButtonText">Änderungen übernehmen</sys:String>
-        <sys:String x:Key="SaveAsReferenceButtonText">Referenzkonfiguration specihern</sys:String>
-        <sys:String x:Key="ApplyReferenceButtonText">Referenzkonfiguration übernehmen</sys:String>
-        <sys:String x:Key="ConflictMessage">Es liegen Konflikte vor!</sys:String>
-
         <!-- Converter -->
         <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <conv:ConflictColorConverter x:Key="ConflictColorConverter" />
@@ -36,11 +29,11 @@
         </Grid.RowDefinitions>
 
         <CheckBox Grid.Row="0" IsThreeState="True" HorizontalAlignment="Left"
-                  Content="{Binding Source={StaticResource PrivateCopyLabel}}" Margin="0,0,0,5"
+                  Content="{x:Static resx:UI.LocalCopyLabel}" Margin="0,0,0,5"
                   IsChecked="{Binding ShowLocalCopy}" />
 
         <CheckBox Grid.Row="0" IsThreeState="False" HorizontalAlignment="Right"
-                  Content="{Binding Source={StaticResource ShowOnlyConflictsLabel}}" Margin="0,0,0,5"
+                  Content="{x:Static resx:UI.ShowConflictsLabel}" Margin="0,0,0,5"
                   IsChecked="{Binding ShowOnlyConflicts}" />
 
         <TreeView Grid.Row="1" Margin="0,0,0,5" ItemsSource="{Binding ProjectList}">
@@ -66,7 +59,7 @@
         <!-- Message -->
         <Label Grid.Row="2"
                Visibility="{Binding HasConflicts, Converter={StaticResource BooleanToVisibilityConverter}}"
-               Foreground="Red" FontWeight="Bold" Content="{Binding Source={StaticResource ConflictMessage}}" />
+               Foreground="Red" FontWeight="Bold" Content="{x:Static resx:UI.ConflictMessage}" />
 
         <!-- Buttons -->
         <Button Grid.Row="3"
@@ -74,7 +67,7 @@
                 Width="140"
                 Command="{Binding SaveChangesCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
-            <TextBlock TextWrapping="Wrap" Text="{Binding Source={StaticResource ApplyButtonText}}"
+            <TextBlock TextWrapping="Wrap" Text="{x:Static resx:UI.ApplyChangesButton}"
                        TextAlignment="Center" />
         </Button>
 
@@ -83,7 +76,7 @@
                 Width="140"
                 Command="{Binding ApplyReferenceCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
-            <TextBlock TextWrapping="Wrap" Text="{Binding Source={StaticResource ApplyReferenceButtonText}}"
+            <TextBlock TextWrapping="Wrap" Text="{x:Static resx:UI.RestoreReferenceButton}"
                        TextAlignment="Center" />
         </Button>
 
@@ -92,7 +85,7 @@
                 Width="140"
                 Command="{Binding SaveReferenceCommand}"
                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
-            <TextBlock TextWrapping="Wrap" Text="{Binding Source={StaticResource SaveAsReferenceButtonText}}"
+            <TextBlock TextWrapping="Wrap" Text="{x:Static resx:UI.SaveAsReferenceButton}"
                        TextAlignment="Center" />
         </Button>
     </Grid>

@@ -111,6 +111,8 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModel
             .ForEach(fe => fe.Template = projectConfiguration.AssignedReferences
                .FirstOrDefault(f => Equals(f.ReferenceIdentity, fe.ReferenceIdentity))
                ?? new ReferenceTemplateModel(fe.ReferenceIdentity));
+
+         OnPropertyChanged("ShowOnlyConflicts");
       }
 
       private void LoadReferences(VSProject originProject, ProjectTemplateModel projectConfiguration) {
