@@ -121,7 +121,7 @@
     <value>Änderungen übernehmen</value>
   </data>
   <data name="ConflictMessage" xml:space="preserve">
-    <value>Es sind Konflikte zum gespeicherten zustand vorhanden!</value>
+    <value>Es sind Konflikte zum gespeicherten Zustand vorhanden!</value>
   </data>
   <data name="DialogTitle" xml:space="preserve">
     <value>Überprüfen der Lokale Kopie Einstellungen in der Projektmappe</value>

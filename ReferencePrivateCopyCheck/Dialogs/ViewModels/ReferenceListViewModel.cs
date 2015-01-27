@@ -9,16 +9,25 @@ using VSLangProj;
 
 namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModels {
    public class ReferenceListViewModel : INotifyPropertyChanged {
-      public ReferenceListViewModel(IEnumerable<VSProject> originProjects, IEnumerable<ProjectTemplateModel> configurations) {
-         ProjectList = originProjects.Select(s => new ProjectViewModel(s, configurations
+      public ReferenceListViewModel(IEnumerable<VSProject> originProjects, ICollection<ProjectTemplateModel> configurations) {
+         var vsProjects = originProjects as VSProject[] ?? originProjects.ToArray();
+         ProjectList = vsProjects.Select(s => new ProjectViewModel(s, configurations
             .FirstOrDefault(f => Equals(f.ProjectIdentity, s.Project.UniqueName))
                                                                           ?? new ProjectTemplateModel(s.Project.UniqueName)))
             .ToList();
 
+         ReferenceList = new ListByReferenceViewModel(vsProjects, configurations);
+
          ApplyReferenceCommand = new ApplyReferenceConfigurationCommand(this);
+         SaveChangesCommand = new SaveChangesCommand(vsProjects);
       }
 
       #region Properties
+
+      public ListByReferenceViewModel ReferenceList {
+         get;
+         set;
+      }
 
       private bool? _showLocalCopy = null;
 

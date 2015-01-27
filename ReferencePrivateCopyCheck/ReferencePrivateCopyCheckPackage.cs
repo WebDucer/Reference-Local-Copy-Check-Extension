@@ -104,9 +104,10 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck {
          }
 
          var model = new ReferenceListViewModel(vsProjects, configurations) {
-            ShowLocalCopy = null,
-            SaveChangesCommand = new SaveChangesCommand(vsProjects)
+            ShowLocalCopy = null
          };
+
+         var referenceModel = new ListByReferenceViewModel(vsProjects, configurations);
          model.SaveReferenceCommand = new SaveReferenceCommand(model, configFileName);
 
          var dialog = new ReferenceList {

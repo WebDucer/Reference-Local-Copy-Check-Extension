@@ -8,10 +8,9 @@ using EnvDTE;
 using VSLangProj;
 
 namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.Design {
-   public class DesignTimeReferenceListViewModel : ReferenceListViewModel {
-      public DesignTimeReferenceListViewModel() : base(LoadDesignTimeData(), LoadDesignTimeTemplates()) {
-         ShowLocalCopy = false;
-      }
+   internal class DesignTimeListByReferenceViewModel : ListByReferenceViewModel {
+      public DesignTimeListByReferenceViewModel()
+         : base(LoadDesignTimeData(), LoadDesignTimeTemplates()) {}
 
       private static IEnumerable<VSProject> LoadDesignTimeData() {
          var proj1Refs = new DesignReferenceList();

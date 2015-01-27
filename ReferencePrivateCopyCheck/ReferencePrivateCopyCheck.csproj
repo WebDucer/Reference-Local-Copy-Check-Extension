@@ -48,7 +48,19 @@
     <Reference Include="envdte80, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="GalaSoft.MvvmLight">
+      <HintPath>..\packages\Portable.MvvmLightLibs.5.0.2.0\lib\net45\GalaSoft.MvvmLight.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Extras">
+      <HintPath>..\packages\Portable.MvvmLightLibs.5.0.2.0\lib\net45\GalaSoft.MvvmLight.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="GalaSoft.MvvmLight.Platform">
+      <HintPath>..\packages\Portable.MvvmLightLibs.5.0.2.0\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.OLE.Interop" />
     <Reference Include="Microsoft.VisualStudio.Shell.Interop" />
     <Reference Include="Microsoft.VisualStudio.Shell.Interop.8.0" />
@@ -76,6 +88,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.MvvmLightLibs.5.0.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="VSLangProj, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -109,13 +124,22 @@
     <Compile Include="Dialogs\Commands\GenericCommand.cs" />
     <Compile Include="Dialogs\Commands\SaveReferenceCommand.cs" />
     <Compile Include="Dialogs\Converter\ConflictColorConverter.cs" />
+    <Compile Include="Dialogs\Design\DesignTimeListByReferenceViewModel.cs" />
     <Compile Include="Dialogs\Design\DesignTimeReferenceListViewModel.cs" />
     <Compile Include="Dialogs\Commands\SaveChangesCommand.cs" />
     <Compile Include="Dialogs\Model\ProjectTemplateModel.cs" />
     <Compile Include="Dialogs\Model\ReferenceTemplateModel.cs" />
+    <Compile Include="Dialogs\ViewModels\ListByReferenceViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\ProjectReferenceItemViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\ProjectViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\ReferenceListViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\ReferenceViewModel.cs" />
+    <Compile Include="Dialogs\Views\ListByProjectView.xaml.cs">
+      <DependentUpon>ListByProjectView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Views\ListByReferenceView.xaml.cs">
+      <DependentUpon>ListByReferenceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Guids.cs" />
     <Compile Include="Dialogs\Views\ReferenceList.xaml.cs">
       <DependentUpon>ReferenceList.xaml</DependentUpon>
@@ -181,6 +205,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Dialogs\Views\ListByProjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Views\ListByReferenceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\Views\ReferenceList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -44,6 +44,10 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModel
          }
       }
 
+      public Reference OriginReference { get {
+         return _originReference;
+      } }
+
       private ReferenceTemplateModel _template;
 
       public ReferenceTemplateModel Template {

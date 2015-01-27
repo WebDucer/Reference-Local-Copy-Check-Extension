@@ -6,7 +6,7 @@ using EnvDTE;
 namespace de.webducer.net.extensions.ReferencePrivateCopyCheck
 {
     public static class VsProjectHelper {
-       private const int _MAX_RECURSION_COUNT = 10;
+       private const int _MAX_RECURSION_COUNT = 20;
 
        #region Publics
        public static IEnumerable<Project> GetCsharpProjects(this Projects @this, int level = 0) {
