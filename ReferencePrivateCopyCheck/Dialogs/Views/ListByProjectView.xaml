@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.Views.ListByProjectView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dvm="clr-namespace:de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.Design"
+             xmlns:vm="clr-namespace:de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModels"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance dvm:DesignTimeListByProjectViewModel, IsDesignTimeCreatable=True}"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <TreeView ItemsSource="{Binding FilteredGroupedProjects}">
+        <TreeView.ItemTemplate>
+            <HierarchicalDataTemplate ItemsSource="{Binding References}">
+                <TextBlock ToolTip="{Binding FullPath}">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} - ({1}/{2})">
+                            <Binding Path="Name" />
+                            <Binding Path="PrivateCopyCount" />
+                            <Binding Path="ReferenceCount" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+                <HierarchicalDataTemplate.ItemTemplate>
+                    <DataTemplate DataType="{x:Type vm:ProjectReferenceItemViewModel}">
+                        <StackPanel Orientation="Horizontal" Margin="0,0,0,2">
+                            <CheckBox IsThreeState="True" IsChecked="{Binding IsPrivateCopyInTemplate, Mode=OneWay}"
+                                      IsEnabled="False" Content=" " />
+                            <CheckBox IsThreeState="False" IsChecked="{Binding IsPrivateCopy}"
+                                      Content="{Binding ReferenceName, Mode=OneWay}" />
+                        </StackPanel>
+                    </DataTemplate>
+                </HierarchicalDataTemplate.ItemTemplate>
+            </HierarchicalDataTemplate>
+        </TreeView.ItemTemplate>
+    </TreeView>
+</UserControl>

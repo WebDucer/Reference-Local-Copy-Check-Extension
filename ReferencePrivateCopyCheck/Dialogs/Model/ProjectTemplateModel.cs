@@ -12,7 +12,7 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.Model {
 
       public string ProjectIdentity { get; private set; }
 
-      public IEnumerable<ReferenceTemplateModel> AssignedReferences { get; set; }
+      public ICollection<ReferenceTemplateModel> AssignedReferences { get; set; }
 
       #endregion
 
