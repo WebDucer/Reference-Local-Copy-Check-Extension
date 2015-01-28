@@ -103,16 +103,20 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck {
             configurations = JsonConvert.DeserializeObject<List<ProjectTemplateModel>>(configContent);
          }
 
-         var model = new ReferenceListViewModel(vsProjects, configurations) {
-            ShowLocalCopy = null
+         var viewModel = new ReferenceDialogViewModel(vsProjects, configurations);
+         var dialog = new ReferenceDialog {
+            DataContext = viewModel
          };
 
-         var referenceModel = new ListByReferenceViewModel(vsProjects, configurations);
-         model.SaveReferenceCommand = new SaveReferenceCommand(model, configFileName);
+         //var model = new ReferenceListViewModel(vsProjects, configurations) {
+         //   ShowLocalCopy = null
+         //};
 
-         var dialog = new ReferenceList {
-            DataContext = model
-         };
+         //model.SaveReferenceCommand = new SaveReferenceCommand(model, configFileName);
+
+         //var dialog = new ReferenceList {
+         //   DataContext = model
+         //};
 
          dialog.ShowDialog();
       }

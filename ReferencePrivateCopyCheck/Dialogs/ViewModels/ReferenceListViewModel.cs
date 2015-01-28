@@ -13,7 +13,7 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModel
          var vsProjects = originProjects as VSProject[] ?? originProjects.ToArray();
          ProjectList = vsProjects.Select(s => new ProjectViewModel(s, configurations
             .FirstOrDefault(f => Equals(f.ProjectIdentity, s.Project.UniqueName))
-                                                                          ?? new ProjectTemplateModel(s.Project.UniqueName)))
+                                                                      ?? new ProjectTemplateModel(s.Project.UniqueName)))
             .ToList();
 
          ReferenceList = new ListByReferenceViewModel(vsProjects, configurations);
@@ -24,10 +24,7 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModel
 
       #region Properties
 
-      public ListByReferenceViewModel ReferenceList {
-         get;
-         set;
-      }
+      public ListByReferenceViewModel ReferenceList { get; set; }
 
       private bool? _showLocalCopy = null;
 

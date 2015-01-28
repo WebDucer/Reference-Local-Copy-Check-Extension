@@ -4,10 +4,9 @@ using de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModels;
 using VSLangProj;
 
 namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.Design {
-   public class DesignTimeReferenceListViewModel : ReferenceListViewModel {
-      public DesignTimeReferenceListViewModel() : base(LoadDesignTimeData(), LoadDesignTimeTemplates()) {
-         ShowLocalCopy = false;
-      }
+   public class DesignTimeReferenceDialogViewModel : ReferenceDialogViewModel {
+      public DesignTimeReferenceDialogViewModel()
+         : base(LoadDesignTimeData(), LoadDesignTimeTemplates()) {}
 
       private static IEnumerable<VSProject> LoadDesignTimeData() {
          var proj1Refs = new DesignReferenceList();

@@ -124,21 +124,37 @@
     <Compile Include="Dialogs\Commands\GenericCommand.cs" />
     <Compile Include="Dialogs\Commands\SaveReferenceCommand.cs" />
     <Compile Include="Dialogs\Converter\ConflictColorConverter.cs" />
+    <Compile Include="Dialogs\Converter\SameEnumValueConverter.cs" />
+    <Compile Include="Dialogs\Design\DesignProject.cs" />
+    <Compile Include="Dialogs\Design\DesignReference.cs" />
+    <Compile Include="Dialogs\Design\DesignReferenceList.cs" />
     <Compile Include="Dialogs\Design\DesignTimeListByReferenceViewModel.cs" />
+    <Compile Include="Dialogs\Design\DesignTimeReferenceDialogViewModel.cs" />
     <Compile Include="Dialogs\Design\DesignTimeReferenceListViewModel.cs" />
     <Compile Include="Dialogs\Commands\SaveChangesCommand.cs" />
+    <Compile Include="Dialogs\Design\DesignVSProject.cs" />
+    <Compile Include="Dialogs\Interfaces\IBasedView.cs" />
     <Compile Include="Dialogs\Model\ProjectTemplateModel.cs" />
     <Compile Include="Dialogs\Model\ReferenceTemplateModel.cs" />
+    <Compile Include="Dialogs\Model\ViewType.cs" />
+    <Compile Include="Dialogs\ViewModels\EmptyListViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\ListByReferenceViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\ProjectReferenceItemViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\ProjectViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\ReferenceDialogViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\ReferenceListViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\ReferenceViewModel.cs" />
+    <Compile Include="Dialogs\Views\EmptyListView.xaml.cs">
+      <DependentUpon>EmptyListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dialogs\Views\ListByProjectView.xaml.cs">
       <DependentUpon>ListByProjectView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Dialogs\Views\ListByReferenceView.xaml.cs">
       <DependentUpon>ListByReferenceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dialogs\Views\ReferenceDialog.xaml.cs">
+      <DependentUpon>ReferenceDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Guids.cs" />
     <Compile Include="Dialogs\Views\ReferenceList.xaml.cs">
@@ -205,11 +221,19 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Dialogs\Views\EmptyListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Dialogs\Views\ListByProjectView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\Views\ListByReferenceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Dialogs\Views\ReferenceDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

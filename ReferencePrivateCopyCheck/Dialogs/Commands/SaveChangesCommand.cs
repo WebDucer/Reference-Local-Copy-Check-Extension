@@ -13,12 +13,16 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.Commands 
       }
 
       protected override void OnExecute(Window parameter) {
+         parameter.IsEnabled = false;
+
          if (OnCanExecute(parameter)) {
             _projects
                .Where(w => !w.Project.Saved)
                .ToList()
                .ForEach(fe => fe.Project.Save());
          }
+
+         parameter.IsEnabled = true;
 
          parameter.Dispatcher.BeginInvoke(new Action(parameter.Close));
       }

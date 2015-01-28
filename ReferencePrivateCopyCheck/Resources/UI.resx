@@ -126,8 +126,17 @@
   <data name="DialogTitle" xml:space="preserve">
     <value>Check the solition local copy flags</value>
   </data>
+  <data name="EmptyListMessage" xml:space="preserve">
+    <value>Please select one of the available views!</value>
+  </data>
   <data name="LocalCopyLabel" xml:space="preserve">
     <value>Local Copy</value>
+  </data>
+  <data name="ProjectBasedViewType" xml:space="preserve">
+    <value>Project Based View</value>
+  </data>
+  <data name="ReferenceBasedViewType" xml:space="preserve">
+    <value>Reference Based View</value>
   </data>
   <data name="RestoreReferenceButton" xml:space="preserve">
     <value>Restore from stored state</value>
@@ -137,5 +146,8 @@
   </data>
   <data name="ShowConflictsLabel" xml:space="preserve">
     <value>Show only conflicts</value>
+  </data>
+  <data name="ShowOnlyExternals" xml:space="preserve">
+    <value>Show only external libraries</value>
   </data>
 </root>

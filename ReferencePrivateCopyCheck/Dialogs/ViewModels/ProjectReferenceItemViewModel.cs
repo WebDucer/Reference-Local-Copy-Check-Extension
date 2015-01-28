@@ -61,6 +61,27 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModel
          }
       }
       #endregion
+
+      #region Is Source Code
+
+      public bool IsSourceCodeReference {
+         get {
+            return _originReference.SourceProject != null;
+         }
+      }
+
+      #endregion
+
+      #region Has Conflict
+
+      public bool HasConflict {
+         get {
+            return IsPrivateCopyInTemplate != IsPrivateCopy;
+         }
+      }
+
+      #endregion
+
       #endregion
 
       #region Helper
