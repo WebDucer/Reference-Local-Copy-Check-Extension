@@ -121,13 +121,22 @@
     <value>Änderungen übernehmen</value>
   </data>
   <data name="ConflictMessage" xml:space="preserve">
-    <value>Es sind Konflikte zum gespeicherten zustand vorhanden!</value>
+    <value>Es sind Konflikte zum gespeicherten Zustand vorhanden!</value>
   </data>
   <data name="DialogTitle" xml:space="preserve">
     <value>Überprüfen der Lokale Kopie Einstellungen in der Projektmappe</value>
   </data>
+  <data name="EmptyListMessage" xml:space="preserve">
+    <value>Bitte wählen Sie eines der verfügbaren Ansichten!</value>
+  </data>
   <data name="LocalCopyLabel" xml:space="preserve">
     <value>Lokale Kopie</value>
+  </data>
+  <data name="ProjectBasedViewType" xml:space="preserve">
+    <value>Projektbasierte Ansicht</value>
+  </data>
+  <data name="ReferenceBasedViewType" xml:space="preserve">
+    <value>Verweisbasierte Ansicht</value>
   </data>
   <data name="RestoreReferenceButton" xml:space="preserve">
     <value>Widerherstellen des gespeicherten Zustandes</value>
@@ -137,5 +146,8 @@
   </data>
   <data name="ShowConflictsLabel" xml:space="preserve">
     <value>Nur Konflikte anzeigen</value>
+  </data>
+  <data name="ShowOnlyExternals" xml:space="preserve">
+    <value>Nur externe Bibliotheken</value>
   </data>
 </root>

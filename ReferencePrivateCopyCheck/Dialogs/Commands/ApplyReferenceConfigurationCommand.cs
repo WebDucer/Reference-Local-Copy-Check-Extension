@@ -1,39 +1,42 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModels;
+using de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.Model;
+using VSLangProj;
 
 namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.Commands {
    public class ApplyReferenceConfigurationCommand : GenericCommand<Window> {
-      private readonly ReferenceListViewModel _mainModel;
+      private readonly IEnumerable<VSProject> _projects;
+      private readonly IEnumerable<ProjectTemplateModel> _configurations;
 
-      public ApplyReferenceConfigurationCommand(ReferenceListViewModel mainModel) {
-         _mainModel = mainModel;
+      public ApplyReferenceConfigurationCommand(IEnumerable<VSProject> projects, IEnumerable<ProjectTemplateModel> configurations) {
+         _projects = projects;
+         _configurations = configurations;
       }
 
       protected override void OnExecute(Window parameter) {
-         if (OnCanExecute(parameter)) {
-            // Apply Local Copy Flag from configuration
-            _mainModel.ProjectList
-               .ToList()
-               .ForEach(fe => fe.ReferenceList.ToList().ForEach(rfe => {
-                  if (rfe.Template.HasLocalCopy.HasValue && rfe.IsLocalCopy != rfe.Template.HasLocalCopy.Value) {
-                     rfe.IsLocalCopy = rfe.Template.HasLocalCopy.Value;
-                  }
-               }));
+         // Apply Local Copy Flag from configuration
+         foreach (var projectConfig in _configurations) {
+            var project = _projects.FirstOrDefault(f => projectConfig.ProjectIdentity.Equals(f.Project.UniqueName));
 
-            // Save changes
-            _mainModel.ProjectList
-               .Where(w => !w.OriginProject.Project.Saved)
-               .ToList()
-               .ForEach(fe => fe.OriginProject.Project.Save());
+            if (project == null) { continue; }
+
+            foreach (var refConfig in projectConfig.AssignedReferences) {
+               var reference = project.References.Cast<Reference>().FirstOrDefault(f => refConfig.ReferenceIdentity.Equals(f.Identity));
+               if (reference != null && refConfig.HasLocalCopy.HasValue) {
+                  reference.CopyLocal = refConfig.HasLocalCopy.Value;
+               }
+            }
          }
 
-         parameter.Dispatcher.BeginInvoke(new Action(parameter.Close));
-      }
+         // Save changes
+         _projects
+            .Where(w => !w.Project.Saved)
+            .ToList()
+            .ForEach(fe => fe.Project.Save());
 
-      protected override bool OnCanExecute(Window parameter) {
-         return _mainModel != null && _mainModel.HasConflicts;
+         parameter.Dispatcher.BeginInvoke(new Action(parameter.Close));
       }
    }
 }
