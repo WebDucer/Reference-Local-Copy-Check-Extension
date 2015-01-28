@@ -128,22 +128,22 @@
     <Compile Include="Dialogs\Design\DesignProject.cs" />
     <Compile Include="Dialogs\Design\DesignReference.cs" />
     <Compile Include="Dialogs\Design\DesignReferenceList.cs" />
+    <Compile Include="Dialogs\Design\DesignTimeListByProjectViewModel.cs" />
     <Compile Include="Dialogs\Design\DesignTimeListByReferenceViewModel.cs" />
     <Compile Include="Dialogs\Design\DesignTimeReferenceDialogViewModel.cs" />
-    <Compile Include="Dialogs\Design\DesignTimeReferenceListViewModel.cs" />
     <Compile Include="Dialogs\Commands\SaveChangesCommand.cs" />
     <Compile Include="Dialogs\Design\DesignVSProject.cs" />
     <Compile Include="Dialogs\Interfaces\IBasedView.cs" />
+    <Compile Include="Dialogs\Model\ProjectGroupWrapper.cs" />
     <Compile Include="Dialogs\Model\ProjectTemplateModel.cs" />
     <Compile Include="Dialogs\Model\ReferenceTemplateModel.cs" />
     <Compile Include="Dialogs\Model\ViewType.cs" />
     <Compile Include="Dialogs\ViewModels\EmptyListViewModel.cs" />
+    <Compile Include="Dialogs\ViewModels\ListByProjectViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\ListByReferenceViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\ProjectReferenceItemViewModel.cs" />
-    <Compile Include="Dialogs\ViewModels\ProjectViewModel.cs" />
     <Compile Include="Dialogs\ViewModels\ReferenceDialogViewModel.cs" />
-    <Compile Include="Dialogs\ViewModels\ReferenceListViewModel.cs" />
-    <Compile Include="Dialogs\ViewModels\ReferenceViewModel.cs" />
+    <Compile Include="Dialogs\Model\ReferenceGroupWrapper.cs" />
     <Compile Include="Dialogs\Views\EmptyListView.xaml.cs">
       <DependentUpon>EmptyListView.xaml</DependentUpon>
     </Compile>
@@ -157,9 +157,6 @@
       <DependentUpon>ReferenceDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Guids.cs" />
-    <Compile Include="Dialogs\Views\ReferenceList.xaml.cs">
-      <DependentUpon>ReferenceList.xaml</DependentUpon>
-    </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="ReferencePrivateCopyCheckPackage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -234,10 +231,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Dialogs\Views\ReferenceDialog.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Dialogs\Views\ReferenceList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

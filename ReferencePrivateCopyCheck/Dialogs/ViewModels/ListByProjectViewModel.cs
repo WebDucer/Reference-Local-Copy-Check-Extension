@@ -8,29 +8,29 @@ using GalaSoft.MvvmLight;
 using VSLangProj;
 
 namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModels {
-   public class ListByReferenceViewModel : ViewModelBase, IBasedView {
+   public class ListByProjectViewModel : ViewModelBase, IBasedView {
       private readonly IEnumerable<VSProject> _originProjects;
       private readonly ICollection<ProjectTemplateModel> _configurations;
 
       #region Constructors
 
-      public ListByReferenceViewModel(IEnumerable<VSProject> originProjects, ICollection<ProjectTemplateModel> configurations) {
+      public ListByProjectViewModel(IEnumerable<VSProject> originProjects, ICollection<ProjectTemplateModel> configurations) {
          var vsProjects = originProjects as IList<VSProject> ?? originProjects.ToList();
 
          _originProjects = vsProjects;
          _configurations = configurations;
 
-         GroupedReferences = vsProjects
+         GroupedProjects = vsProjects
             .SelectMany(s => s.References.Cast<Reference>())
-            .OrderBy(o => o.Name)
-            .ThenBy(t => t.ContainingProject.Name)
+            .OrderBy(t => t.ContainingProject.Name)
+            .ThenBy(o => o.Name)
             .GroupBy(g => new {
-               g.Name,
-               g.Version
+               g.ContainingProject.Name,
+               g.ContainingProject.FullName
             })
-            .Select(s => new ReferenceGroupWrapper {
+            .Select(s => new ProjectGroupWrapper {
                Name = s.Key.Name,
-               Version = s.Key.Version,
+               FullName = s.Key.FullName,
                References = s.Select(ss => new ProjectReferenceItemViewModel(ss, configurations))
             });
       }
@@ -39,16 +39,16 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModel
 
       #region Properties
 
-      #region Grouped References
+      #region Grouped Projects
 
-      private IEnumerable<ReferenceGroupWrapper> _groupedReferences = null;
+      private IEnumerable<ProjectGroupWrapper> _groupedProjects = null;
 
-      public IEnumerable<ReferenceGroupWrapper> GroupedReferences {
+      public IEnumerable<ProjectGroupWrapper> GroupedProjects {
          get {
-            return _groupedReferences;
+            return _groupedProjects;
          }
          private set {
-            Set(() => GroupedReferences, ref _groupedReferences, value);
+            Set(() => GroupedProjects, ref _groupedProjects, value);
          }
       }
 
@@ -57,20 +57,20 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModel
       #region Filtered Grouped Reference
 
       /// <summary>
-      ///    The <see cref="FilteredGroupedReferences" /> property's name.
+      ///    The <see cref="FilteredGroupedProjects" /> property's name.
       /// </summary>
-      public const string FilteredGroupedReferencesPropertyName = "FilteredGroupedReferences";
+      public const string FilteredGroupedReferencesPropertyName = "FilteredGroupedProjects";
 
       private ICollectionView _filteredGroupedReferences = null;
 
       /// <summary>
-      ///    Sets and gets the FilteredGroupedReferences property.
+      ///    Sets and gets the FilteredGroupedProjects property.
       ///    Changes to that property's value raise the PropertyChanged event.
       /// </summary>
-      public ICollectionView FilteredGroupedReferences {
+      public ICollectionView FilteredGroupedProjects {
          get {
             if (_filteredGroupedReferences == null) {
-               _filteredGroupedReferences = CollectionViewSource.GetDefaultView(_groupedReferences);
+               _filteredGroupedReferences = CollectionViewSource.GetDefaultView(_groupedProjects);
                _filteredGroupedReferences.Filter = FilterReferences;
             }
             return _filteredGroupedReferences;
@@ -86,7 +86,7 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModel
       /// </summary>
       public const string OnlyExternalPropertyName = "OnlyExternal";
 
-      private bool? _onlyExternal = true;
+      private bool? _onlyExternal = null;
 
       /// <summary>
       ///    Sets and gets the OnlyExternal property.
@@ -161,7 +161,7 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModel
 
       public bool HasConflicts {
          get {
-            return GroupedReferences.Any(a => a.References.Any(aa => aa.HasConflict));
+            return GroupedProjects.Any(a => a.References.Any(aa => aa.HasConflict));
          }
       }
 
@@ -172,7 +172,7 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModel
       #region Methods
 
       private bool FilterReferences(object o) {
-         var item = o as ReferenceGroupWrapper;
+         var item = o as ProjectGroupWrapper;
          if (item == null) {
             return false;
          }
@@ -185,11 +185,11 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModel
             return false;
          }
          // With local copy on
-         if (OnlyWithLocalCopyOn == true && item.References.All(a => !a.IsPrivateCopy)) {
+         if(OnlyWithLocalCopyOn == true && item.References.All(a => !a.IsPrivateCopy)) {
             return false;
          }
          // With no local copy on
-         if (OnlyWithLocalCopyOn == false && item.References.All(a => a.IsPrivateCopy)) {
+         if(OnlyWithLocalCopyOn == false && item.References.All(a => a.IsPrivateCopy)) {
             return false;
          }
          // With conflicts

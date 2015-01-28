@@ -13,11 +13,14 @@
         d:DataContext="{d:DesignInstance dvm:DesignTimeReferenceDialogViewModel, IsDesignTimeCreatable=True}"
         Title="{x:Static resx:UI.DialogTitle}" Height="550" Width="450" WindowStyle="ToolWindow">
     <Window.Resources>
-        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <conv:SameEnumValueConverter x:Key="EnumValueConverter" />
 
         <DataTemplate DataType="{x:Type vm:ListByReferenceViewModel}">
             <v:ListByReferenceView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type vm:ListByProjectViewModel}">
+            <v:ListByProjectView />
         </DataTemplate>
 
         <DataTemplate DataType="{x:Type vm:EmptyListViewModel}">
@@ -41,17 +44,20 @@
                          IsChecked="{Binding ViewType, Converter={StaticResource EnumValueConverter}, ConverterParameter={x:Static m:ViewType.ProjectBasedView}}"
                          Content="{x:Static resx:UI.ProjectBasedViewType}" />
         </StackPanel>
-        
+
         <!-- Filter -->
         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,7,0,0">
-            <CheckBox IsThreeState="True" Content="{x:Static resx:UI.ShowOnlyExternals}" IsChecked="{Binding CurrentView.OnlyExternal}" Margin="0,0,15,0" />
-            <CheckBox IsThreeState="True" Content="{x:Static resx:UI.ShowConflictsLabel}" IsChecked="{Binding CurrentView.OnlyConflicts}" Margin="0,0,15,0" />
-            <CheckBox IsThreeState="True" Content="{x:Static resx:UI.LocalCopyLabel}" IsChecked="{Binding CurrentView.OnlyWithLocalCopyOn}" Margin="0,0,15,0" />
+            <CheckBox IsThreeState="True" Content="{x:Static resx:UI.ShowOnlyExternals}"
+                      IsChecked="{Binding CurrentView.OnlyExternal}" Margin="0,0,15,0" />
+            <CheckBox IsThreeState="True" Content="{x:Static resx:UI.ShowConflictsLabel}"
+                      IsChecked="{Binding CurrentView.OnlyConflicts}" Margin="0,0,15,0" />
+            <CheckBox IsThreeState="True" Content="{x:Static resx:UI.LocalCopyLabel}"
+                      IsChecked="{Binding CurrentView.OnlyWithLocalCopyOn}" Margin="0,0,15,0" />
         </StackPanel>
-        
+
         <!-- List -->
         <ContentControl Grid.Row="2" Content="{Binding CurrentView}" Margin="0,7,0,0" />
-        
+
         <!-- Buttons -->
         <Grid Grid.Row="3" Margin="0,7,0,0">
             <Grid.ColumnDefinitions>
@@ -59,15 +65,35 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            
+
             <!-- Apply Changes -->
             <Button Grid.Column="0"
-                HorizontalAlignment="Left"
-                Width="140"
-                Command="{Binding SaveChangesCommand}"
-                CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                    HorizontalAlignment="Left"
+                    Width="140"
+                    Command="{Binding SaveChangesCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
                 <TextBlock TextWrapping="Wrap" Text="{x:Static resx:UI.ApplyChangesButton}"
-                       TextAlignment="Center" />
+                           TextAlignment="Center" />
+            </Button>
+
+            <!-- Restore configuration -->
+            <Button Grid.Column="1"
+                    HorizontalAlignment="Left"
+                    Width="140"
+                    Command="{Binding ApplyReferenceCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                <TextBlock TextWrapping="Wrap" Text="{x:Static resx:UI.RestoreReferenceButton}"
+                           TextAlignment="Center" />
+            </Button>
+
+            <!-- Save configuration -->
+            <Button Grid.Column="2"
+                    HorizontalAlignment="Left"
+                    Width="140"
+                    Command="{Binding SaveReferenceCommand}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource AncestorType={x:Type Window}}}">
+                <TextBlock TextWrapping="Wrap" Text="{x:Static resx:UI.SaveAsReferenceButton}"
+                           TextAlignment="Center" />
             </Button>
         </Grid>
     </Grid>

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.Commands;
 using de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.Interfaces;
@@ -23,10 +24,14 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModel
          _originProjects = originProjects;
          _configurations = configurations;
 
-         ViewType = ViewType.ReferenceBasedView;
+         ViewType = ViewType.None;
+         CurrentView = _views[ViewType];
 
          // Init Commands
-         SaveChangesCommand = new SaveChangesCommand(_originProjects);
+         var vsProjects = _originProjects as IList<VSProject> ?? _originProjects.ToList();
+
+         SaveChangesCommand = new SaveChangesCommand(vsProjects);
+         ApplyReferenceCommand = new ApplyReferenceConfigurationCommand(vsProjects, _configurations);
       }
 
       #endregion
@@ -49,21 +54,23 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModel
             return _viewType;
          }
          set {
-            if (Set(() => ViewType, ref _viewType, value)) {
-               if (!_views.ContainsKey(value)) {
-                  switch (value) {
-                     case ViewType.None:
-                        _views.Add(value, new EmptyListViewModel());
-                        break;
-                     case ViewType.ReferenceBasedView:
-                     case ViewType.ProjectBasedView:
-                        _views.Add(value, new ListByReferenceViewModel(_originProjects, _configurations));
-                        break;
-                  }
-               }
+            if (!Set(() => ViewType, ref _viewType, value)) { return; }
 
-               CurrentView = _views[value];
+            if (!_views.ContainsKey(value)) {
+               switch (value) {
+                  case ViewType.ProjectBasedView:
+                     _views.Add(value, new ListByProjectViewModel(_originProjects, _configurations));
+                     break;
+                  case ViewType.ReferenceBasedView:
+                     _views.Add(value, new ListByReferenceViewModel(_originProjects, _configurations));
+                     break;
+                  default:
+                     _views.Add(value, new EmptyListViewModel());
+                     break;
+               }
             }
+
+            CurrentView = _views[value];
          }
       }
 
@@ -87,7 +94,9 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModel
          }
       }
 
-      public ICommand SaveChangesCommand { get; set; }
+      public ICommand SaveChangesCommand { get; private set; }
+
+      public ICommand SaveReferenceCommand { get; set; }
 
       public ICommand ApplyReferenceCommand { get; private set; }
 

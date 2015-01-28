@@ -1,19 +1,19 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
 using de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.Model;
-using de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.ViewModels;
 using Newtonsoft.Json;
 using VSLangProj;
 
 namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.Commands {
    public class SaveReferenceCommand : GenericCommand<Window> {
-      private readonly ReferenceListViewModel _mainModel;
+      private readonly IEnumerable<VSProject> _projects;
       private readonly string _configFileName;
 
-      public SaveReferenceCommand(ReferenceListViewModel mainModel, string configFileName) {
-         _mainModel = mainModel;
+      public SaveReferenceCommand(IEnumerable<VSProject> projects, string configFileName) {
+         _projects = projects;
          _configFileName = configFileName;
       }
 
@@ -22,24 +22,18 @@ namespace de.webducer.net.extensions.ReferencePrivateCopyCheck.Dialogs.Commands 
             return;
          }
 
-         var referenceConfiguration = _mainModel.ProjectList
-            .Select(s => new ProjectTemplateModel(s.OriginProject.Project.UniqueName) {
+         var referenceConfiguration = _projects
+            .Select(s => new ProjectTemplateModel(s.Project.UniqueName) {
                AssignedReferences =
-                  s.OriginProject.References
+                  s.References
                      .OfType<Reference>()
                      .Select(sr => new ReferenceTemplateModel(sr.Identity, sr.CopyLocal))
                      .ToList()
             }).ToList();
 
-      var configurationContent = JsonConvert.SerializeObject(referenceConfiguration, Formatting.Indented);
+         var configurationContent = JsonConvert.SerializeObject(referenceConfiguration, Formatting.Indented);
 
          File.WriteAllText(_configFileName, configurationContent, Encoding.UTF8);
-
-         _mainModel.UpodateReferenceConfiguration(referenceConfiguration);
-      }
-
-      protected override bool OnCanExecute(Window parameter) {
-         return _mainModel != null && _mainModel.HasConflicts;
       }
    }
 }
