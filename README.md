@@ -3,7 +3,7 @@
 ## Beschreibung
 Die Visual Studio Erweiterung prüft die Lokale Kopie Einstellung von allen Verweisen der Projekte in einer Projektmappe. Der aktuelle Zustand kann für den späteren Vergleich und Widerherstellung gespeichert werden.
 
-Source-Code und Issue-Tracker sind bei [Bitbucket](http:bitbucket.org/WebDucer/reference-local-copy-check-extension) zu finden.
+Source-Code und Issue-Tracker sind bei [Bitbucket](https://bitbucket.org/webducertutorials/reference-local-copy-check-extension) zu finden.
 
 Folgende Features sind bereits über die Erweiterung abgedeckt:
 - Auflistung aller Verweise (C# Projekte) der Projektmappe
